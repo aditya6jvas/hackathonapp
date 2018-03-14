@@ -115,6 +115,16 @@ def confirmedOrder(request):
         return HttpResponse('This is an invalid response, try post')
 
 @csrf_exempt
+def singleOrder(request):
+    if request.method == 'POST':
+        queryset = Order.objects.filter(shopId = request.POST.get('shopId'), orderId = request.POST.get('orderId'))
+        json_data = serializers.serialize('json', queryset)
+        return HttpResponse(json_data, content_type="application/json")
+    else:
+        return HttpResponse('This is an invalid response, try post')
+        
+
+@csrf_exempt
 def killedOrder(request):
     if request.method == 'POST':
         queryset = Order.objects.filter(shopId = request.POST.get('shopId'), status  = 'killed')

@@ -42,8 +42,8 @@ class Order(models.Model):
     shopId = CharField(max_length = 10, default = 'None')
     orderId = IntegerField(default = 0)
     itemList = ArrayField(CharField(max_length=15))
-    quantitiy = ArrayField(CharField(max_length=15))
-
+    quantity = ArrayField(CharField(max_length=15))
+    totalCost = IntegerField(default = 0)  
 
 
      
