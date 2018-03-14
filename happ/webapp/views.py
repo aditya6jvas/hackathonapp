@@ -7,4 +7,13 @@ from django.urls import reverse
 # Create your views here.
 
 def index(request):
-    return render(request, 'index.html', {})
+	if request.method == 'POST':
+		user = request.POST.get('userName')
+		email = request.POST.get('email')
+		mobile = request.POST.get('mobile')
+		print(user)
+		print(email)
+		print(mobile)
+		return HttpResponse('abc')
+	else:
+		return render(request, 'index.html', {})
