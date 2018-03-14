@@ -62,8 +62,11 @@ def singleItem(request):
     if request.method == 'POST':
         shopId = request.POST.get('shopId')
         itemId = request.POST.get('shopId')
-
-        queryset = Item.objects.filter(shopId = shopId, itemId = itemId)
+        try:
+            queryset = Item.objects.get(shopId = shopId, itemId = itemId)
+        except Item.DoesNotExist:
+            return HttpResponse("Item doesn't exist")
+        
         json_data = serializers.serialize('json', queryset)
         return HttpResponse(json_data, content_type="application/json")
 
@@ -122,7 +125,7 @@ def singleOrder(request):
         return HttpResponse(json_data, content_type="application/json")
     else:
         return HttpResponse('This is an invalid response, try post')
-        
+
 
 @csrf_exempt
 def killedOrder(request):
