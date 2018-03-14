@@ -19,6 +19,7 @@ class Item(models.Model):
     details = CharField( max_length = 30 )
     quantity = IntegerField( default=0)
     cost = IntegerField( default=0)
+    image = CharField(max_length =10)
 
 class Shop(models.Model):
     shopId = IntegerField(default=0)
@@ -32,7 +33,7 @@ class Profile(models.Model):
     password = CharField(max_length = 30)
     
     
-class order(models.Model):
+class Order(models.Model):
     userId = IntegerField(default=0)
     orderId = IntegerField(default = 0)
     itemList = ArrayField(CharField(max_length=15))
