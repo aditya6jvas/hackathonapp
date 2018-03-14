@@ -4,6 +4,8 @@ from django.utils.crypto import get_random_string
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
+
+from .models import Shop, Profile, Order, Item
 # Create your views here.
 
 def index(request):
@@ -19,4 +21,9 @@ def index(request):
 		return render(request, 'index.html', {})
 
 def hi(request):
-    return render(request, 'index1.html', {})
+    
+    queryset = Shop.objects.all()
+    return render(request, 'index1.html', {'queryset':queryset})
+
+def cart(request, shopId):
+    pass

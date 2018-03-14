@@ -13,4 +13,6 @@ urlpatterns = [
     path('editItem/', views.editItem, name = 'editItem'),
     path('acceptOrder/', views.acceptOrder, name  = 'acceptOrder'),
     path('killOrder/', views.killOrder, name = 'killOrder'),   
+    path('getIdNames/', views.getIdNames, name = 'getIdNames'),
+    
 ]

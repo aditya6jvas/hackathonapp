@@ -88,6 +88,7 @@ def editItem(request):
             itemObj = Item.objects.get(itemId = itemId, shopId = shopId)
         except Item.DoesNotExist:
             return HttpResponse("no Obj")
+
         itemObj.name = name
         itemObj.details = details
         itemObj.quantity = quantity
@@ -100,9 +101,31 @@ def editItem(request):
         return HttpResponse('This is an invalid response, try post')
 
 @csrf_exempt
+def getIdNames(request):
+    if request.method == 'POST':
+        items = request.POST.get('items')
+        all = []
+        all = items.split(',')
+
+        response_list = []
+        for s in all:
+            try:
+                queries = Item.objects.get(s)
+                response_list.append(queries)
+            except Item.DoesNotExist:
+                return HttpResponse("NO ITEM OF THIS ID")
+            
+
+        json_data = serializers.serialize('json', response_list)
+        return HttpResponse(json_data, content_type="application/json")           
+    else:
+        return HttpResponse('This is an invalid response, try post')
+
+@csrf_exempt
 def waitingOrder(request):
     if request.method == 'POST':
         queryset = Order.objects.filter(shopId = request.POST.get('shopId'), status  = 'waiting')
+        
         json_data = serializers.serialize('json', queryset)
         return HttpResponse(json_data, content_type="application/json")
     else:
