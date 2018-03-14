@@ -76,7 +76,7 @@ WSGI_APPLICATION = 'happ.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'django',
+        'NAME': 'hackathon',
         'USER': 'super',
         'PASSWORD': 'qwertyuiop',
         'HOST': 'localhost',
