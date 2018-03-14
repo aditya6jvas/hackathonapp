@@ -8,3 +8,6 @@ from django.urls import reverse
 
 def index(request):
     return render(request, 'index.html', {})
+
+def hi(request):
+    return render(request, 'index1.html', {})
