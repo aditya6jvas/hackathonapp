@@ -5,6 +5,7 @@ from django.db.models import (
     ForeignKey,
     IntegerField,
     OneToOneField,
+    TextField,
     )
 from django.contrib.postgres.fields import ArrayField
 from django.contrib.auth.models import User
@@ -16,7 +17,7 @@ class Item(models.Model):
     itemId = CharField( max_length = 30 )
     shopId = CharField(max_length = 10, default = 'None')
     name = CharField(max_length =  30 )
-    details = CharField( max_length = 30 )
+    details = TextField()
     quantity = IntegerField( default=0)
     cost = IntegerField( default=0)
     image = CharField(max_length =10, blank = True)
