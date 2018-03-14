@@ -5,7 +5,9 @@ $(window).load(function() {
 	// Animate loader off screen
 	$(".loader").fadeOut("slow");;
 });
-
+var total=0;
+var currentVal;
+var inputVal=0;
 //Ticket count and price minus and plus
 $('.btn-number').click(function(e){
     e.preventDefault();
@@ -17,21 +19,23 @@ $('.btn-number').click(function(e){
 	var ticketPrice = $(this).parents('.ticketBox').attr('data-ticket-price');
 	/* ticket type */
 	var ticketType = $(this).parents('.ticketBox').find('.ticket-name').html();
-	var total;
-	
-    var currentVal = parseInt(input.val());
+    currentVal = parseInt(input.val());
     if (!isNaN(currentVal)) {
         if(type == 'minus') {
             if(currentVal > input.attr('min')) {
                 input.val(currentVal - 1).change();
 				
 				console.log(input.val());
-				total = ticketPrice * input.val();
+				total -= parseInt(ticketPrice );//* input.val());
+
 				console.log(ticketPrice);
-				activeTicket(this, input.val(), ticketPrice, total, ticketType);
+				if(input.val())
+				    inputVal-=1
+				//inputVal-=parseInt(input.val());
+				activeTicket(this, inputVal, ticketPrice, total, ticketType);
             } 
             if(parseInt(input.val()) == input.attr('min')) {
-                $(this).attr('disabled', true);
+                //$(this).attr('disabled',false);// true);
             }
 
         } else if(type == 'plus') {
@@ -40,12 +44,15 @@ $('.btn-number').click(function(e){
                 input.val(currentVal + 1).change();
 				
 				console.log(input.val());
-				total = ticketPrice * input.val();
+				total += parseInt(ticketPrice);// * input.val());
 				console.log(ticketPrice);
-				activeTicket(this, input.val(), ticketPrice, total, ticketType);
+				if(input.val())
+				    inputVal+=1
+				//inputVal+=parseInt(input.val());
+				activeTicket(this, inputVal, ticketPrice, total, ticketType);
             }
             if(parseInt(input.val()) == input.attr('max')) {
-                $(this).attr('disabled', true);
+                $(this).attr('disabled',false);// true);
             }
 
         }
@@ -76,21 +83,22 @@ $('.input-number').change(function() {
 });
 
 function activeTicket(target, inputValue, ticketPrice, total, ticketType) {
-	if(inputValue > 0) {
-		$('#buyTicket .ticketBox').addClass('inActiveTicket');
+	//if(inputValue > 0) {
+		/*$('#buyTicket .ticketBox').addClass('inActiveTicket');
 		$(target).parents('.ticketBox').removeClass('inActiveTicket').addClass('activeTicket');
 		$('.cart .btn').removeClass('disabled');
 		$('.ticket-type').html(ticketType);
 		$('.ticket-count').html(inputValue);
 		$('.ticket-amount').html(ticketPrice);
-		$('.total-amount').html(total);
-	} else {
+		$('.total-amount').html(total);*/
+	//} else {
 		$('#buyTicket .ticketBox').removeClass('inActiveTicket');
 		$(target).parents('.ticketBox').removeClass('activeTicket inActiveTicket');
-		$('.cart .btn').addClass('disabled');
+		//$('.cart .btn').addClass('disabled');
+		$('.cart .btn').removeClass('disabled');
 		$('.ticket-type').html('');
 		$('.ticket-count').html(inputValue);
 		$('.ticket-amount').html(ticketPrice);
 		$('.total-amount').html(total);
-	}
+	//}
 }
